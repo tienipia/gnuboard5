@@ -1,73 +1,58 @@
 <?php
-include_once('./_common.php');
+include_once ('./_common.php');
 
 define('_INDEX_', true);
-if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
+if (! defined('_GNUBOARD_'))
+    exit(); // 개별 페이지 접근 불가
 
-if(defined('G5_THEME_PATH')) {
-    require_once(G5_THEME_PATH.'/index.php');
-    return;
-}
-
-if (G5_IS_MOBILE) {
-    include_once(G5_MOBILE_PATH.'/index.php');
-    return;
-}
-
-include_once(G5_PATH.'/head.php');
+include_once (G5_PATH . '/head.php');
 ?>
-
-<h2 class="sound_only">최신글</h2>
-
-<div class="latest_top_wr">
-    <?php
-    // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
-    // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
-    // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
-    echo latest('pic_list', 'free', 4, 23);			// 최소설치시 자동생성되는 자유게시판
-	echo latest('pic_list', 'qa', 4, 23);			// 최소설치시 자동생성되는 질문답변게시판
-	echo latest('pic_list', 'notice', 4, 23);		// 최소설치시 자동생성되는 공지사항게시판
-    ?>
-</div>
-<div class="latest_wr">
-    <!-- 사진 최신글2 { -->
-    <?php
-    // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
-    // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
-    // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
-    echo latest('pic_block', 'gallery', 4, 23);		// 최소설치시 자동생성되는 갤러리게시판
-    ?>
-    <!-- } 사진 최신글2 끝 -->
-</div>
-
-<div class="latest_wr">
-<!-- 최신글 시작 { -->
-    <?php
-    //  최신글
-    $sql = " select bo_table
-                from `{$g5['board_table']}` a left join `{$g5['group_table']}` b on (a.gr_id=b.gr_id)
-                where a.bo_device <> 'mobile' ";
-    if(!$is_admin)
-	$sql .= " and a.bo_use_cert = '' ";
-    $sql .= " and a.bo_table not in ('notice', 'gallery') ";     //공지사항과 갤러리 게시판은 제외
-    $sql .= " order by b.gr_order, a.bo_order ";
-    $result = sql_query($sql);
-    for ($i=0; $row=sql_fetch_array($result); $i++) {
-		$lt_style = '';
-    	if ($i%3 !== 0 ) $lt_style = "margin-left:2%";
-    ?>
-    <div style="float:left;<?php echo $lt_style ?>" class="lt_wr">
-        <?php
-        // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
-        // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
-        // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
-        echo latest('basic', $row['bo_table'], 6, 24);
-        ?>
-    </div>
-    <?php
-    }
-    ?>
-    <!-- } 최신글 끝 -->
-</div>
+<!-- ***** Welcome Area Start ***** -->
+<section class="welcome-area">
+	<div class="single-welcome-slide">
+		<!-- Background Curve -->
+		<div class="background-curve">
+			<img src="./img/curve-1.png" alt="">
+		</div>
+		<!-- Welcome Content -->
+		<div class="welcome-content h-100">
+			<div class="container h-100">
+				<div class="row h-100 align-items-center">
+					<!-- Welcome Text -->
+					<div class="col-12 col-md-4">
+						<div class="welcome-text">
+							<h2 data-animation="fadeInUp" data-delay="100ms">
+								<span>Nano</span> Inspired
+							</h2>
+							<h5 data-animation="fadeInUp" data-delay="400ms">Get Inspired at</h5>
+							<a href="https://nil.yonsei.ac.kr/journal.html"
+								class="btn uza-btn btn-2" data-animation="fadeInUp"
+								data-delay="700ms">Start Exploring</a>
+						</div>
+					</div>
+					<!-- Welcome Thumbnail -->
+					<div class="col-12 col-md-8">
+						<div class="welcome-thumbnail">
+							<img id="home_img" alt="" data-animation="slideInRight"
+								data-delay="400ms">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<hr />
+<script>
+	$.ajax({
+		url : default_api_server + '/layout',
+		success : function(data) {
+			console.log(data);
+			$('#home_img')[0].src = data.home_image;
+		},
+		dataType : 'json',
+		async : false
+	});
+</script>
 <?php
-include_once(G5_PATH.'/tail.php');
+include_once (G5_PATH . '/tail.php');
