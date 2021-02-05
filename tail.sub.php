@@ -2,11 +2,8 @@
 if (! defined('_GNUBOARD_'))
     exit(); // 개별 페이지 접근 불가
 
-if (! defined('G5_IS_ADMIN') && defined('G5_THEME_PATH') && is_file(G5_THEME_PATH . '/tail.sub.php')) {
-    require_once (G5_THEME_PATH . '/tail.sub.php');
-    return;
-}
-?>
+if (defined('G5_IS_ADMIN')) {
+    ?>
 
 <?php if ($is_admin == 'super') {  ?>
 <!-- <div style='float:left; text-align:center;'>RUN TIME : <?php echo get_microtime()-$begin_time; ?><br></div> -->
@@ -33,5 +30,47 @@ $(function() {
 </body>
 </html>
 <?php
+} else {
+    ?>
+<footer class="footer-area">
+	<div class="container">
+		<div class="row justify-content-between">
+			<!-- Single Footer Widget -->
+			<div class="col-12 col-lg-9">
+				<div class="single-footer-widget mb-80">
+					<div class="footer-content mb-15">
+						<p>
+							jangyeon@yonsei.ac.kr<br>
+						</p>
+						<p>Yonsei University, 85, Songdogwahak-ro, Yeonsu-gu, Incheon
+							21983, Korea</p>
+						<h3>(+82)32-749-5916</h3>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-lg-3">
+				<div class="single-footer-widget mb-80">
+					<div class="copywrite-text mb-15">
+						<img
+							src="https://sit.yonsei.ac.kr/_res/sit/img/common/logo_footer_new.gif">
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</footer>
+
+<script src="<?php echo G5_JS_URL?>/uza.bundle.js"></script>
+
+<?php run_event('tail_sub'); ?>
+</body>
+
+</html>
+
+
+<?php
+}
 
 echo html_end(); // HTML 마지막 처리 함수 : 반드시 넣어주시기 바랍니다.

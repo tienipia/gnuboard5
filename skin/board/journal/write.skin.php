@@ -9,12 +9,12 @@ if (! defined('_GNUBOARD_'))
 		<div class="row h-100 align-items-end">
 			<div class="col-12">
 				<div class="breadcumb--con">
-					<h2 class="title">Gallery</h2>
+					<h2 class="title">Members</h2>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i>
-									Board</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Gallery</li>
+									Members</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Members</li>
 						</ol>
 					</nav>
 				</div>
@@ -55,23 +55,68 @@ if (! defined('_GNUBOARD_'))
 						<div class="row">
 
 
-							<div class="col-9">
+							<div class="col-12">
 								<div class="form-group">
 									<input type="text" class="form-control mb-30" id="wr_subject"
 										name="wr_subject" required value="<?php echo $subject ?>"
 										placeholder="title">
 								</div>
 							</div>
+							<div class="col-12">
+								<div class="form-group">
+									<input type="text" class="form-control mb-30" name="wr_3"
+										required value="<?php echo $write['wr_3'] ?>"
+										placeholder="author">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group">
+									<input type="text" class="form-control mb-30" name="wr_4"
+										required value="<?php echo  $write['wr_4'] ?>"
+										placeholder="저널 이름">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group">
+									<input type="text" class="form-control mb-30" name="wr_5"
+										required value="<?php echo  $write['wr_5'] ?>"
+										placeholder="저널 약어">
+								</div>
+							</div>
+
 							<div class="col-3">
 								<div class="form-group">
-									<select class="form-control mb-30" name="wr_1" required
+									<input type="text" class="form-control mb-30" name="wr_1"
+										required value="<?php echo  $write['wr_1'] ?>"
+										placeholder="no">
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<input type="text" class="form-control mb-30" name="wr_6"
+										required value="<?php echo  $write['wr_6'] ?>"
+										placeholder="vol">
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<input type="text" class="form-control mb-30" name="wr_7"
+										required value="<?php echo  $write['wr_7'] ?>"
+										placeholder="page">
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="form-group">
+									<select class="form-control mb-30" name="wr_2" required
 										placeholder="year"><option value="">연도 선택하세요</option>
 <?php
 $cYear = date("Y");
 for ($i = 0; $i < 50; $i ++) {
-    if ($write['wr_1'] == $cYear)?>
+
+    if ($write['wr_2'] == $cYear)?>
     <option value="<?php echo $cYear?>"
-											<?php  if($write['wr_1']==$cYear){?> selected <?php }?>><?php echo $cYear?></option>
+											<?php  if($write['wr_2']==$cYear){?> selected <?php }?>><?php echo $cYear?></option>
+    
     <?php
     $cYear --;
 }
@@ -79,13 +124,31 @@ for ($i = 0; $i < 50; $i ++) {
 										</select>
 								</div>
 							</div>
+
+
+							<div class="col-6">
+								<div class="form-group">
+									<input type="text" class="form-control mb-30" name="wr_link1"
+										value="<?php echo  $write['wr_link1'] ?>" placeholder="저널 링크">
+								</div>
+							</div>
+
+							<div class="col-6">
+								<div class="form-group">
+									<input type="text" class="form-control mb-30" name="wr_link2"
+										value="<?php echo  $write['wr_link2'] ?>"
+										placeholder="pdf 다운 링크">
+								</div>
+							</div>
+							
+
     <?php for ($i=0; $is_file && $i<$file_count; $i++) { ?>
 							<div class="col-12">
 								<div class="form-group">
 									<label for="bf_file_<?php echo $i+1 ?>" class="lb_icon"><i
 										class="fa fa-folder-open" aria-hidden="true"></i><span
 										class="sound_only"> 이미지 선택</span></label> <input type="file"
-										name="bf_file[]" id="bf_file_<?php echo $i+1 ?>" required accept="image/*"
+										name="bf_file[]" id="bf_file_<?php echo $i+1 ?>"
 										title="이미지 <?php echo $i+1 ?> : 용량 <?php echo $upload_max_filesize ?> 이하만 업로드 가능"
 										class="frm_file ">
         <?php if($w == 'u' && $file[$i]['file']) { ?>
@@ -95,13 +158,16 @@ for ($i = 0; $i < 50; $i ++) {
 										for="bf_file_del<?php echo $i ?>"><?php echo $file[$i]['source'].'('.$file[$i]['size'].')';  ?> 파일 삭제</label>
 									</span>
         <?php } ?>
+        
     </div>
 							</div>
     <?php } ?>
 							
 							
 							<div class="col-12">
-								<button type="submit" class="btn uza-btn btn-3 mt-15">생성하기</button>
+								<div class="text-center">
+									<button type="submit" class="btn uza-btn btn-3 mt-30">생성하기</button>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -147,7 +213,7 @@ for ($i = 0; $i < 50; $i ++) {
 
     function fwrite_submit(f)
     {
-        f.wr_content.value = 'dummy';
+        f.wr_content.value = (f.wr_1.value + '<br />'+f.wr_3.value +'<br />'+f.wr_4.value);
         <?php echo $editor_js; // 에디터 사용시 자바스크립트에서 내용을 폼필드로 넣어주며 내용이 입력되었는지 검사함   ?>
 
         var subject = "";

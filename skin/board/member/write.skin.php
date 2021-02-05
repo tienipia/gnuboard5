@@ -83,12 +83,12 @@ if (! defined('_GNUBOARD_'))
 								<div class="form-group">
 									<input type="text" class="form-control mb-30" name="wr_2"
 										required value="<?php echo  $write['wr_2'] ?>"
-										placeholder="과정">
+										placeholder="과정 / 소속">
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="form-group">
-									<input type="email" class="form-control mb-30" name="wr_3"
+									<input type="text" class="form-control mb-30" name="wr_3"
 										required value="<?php echo  $write['wr_3'] ?>"
 										placeholder="이메일">
 								</div>
@@ -105,7 +105,7 @@ if (! defined('_GNUBOARD_'))
 								<div class="form-group">
 									<label for="bf_file_<?php echo $i+1 ?>" class="lb_icon"><i
 										class="fa fa-folder-open" aria-hidden="true"></i><span
-										class="sound_only"> 이미지 선택</span></label> <input type="file"
+										class="sound_only"> 이미지 선택</span></label> <input type="file" accept="image/*"
 										name="bf_file[]" id="bf_file_<?php echo $i+1 ?>"
 										title="이미지 <?php echo $i+1 ?> : 용량 <?php echo $upload_max_filesize ?> 이하만 업로드 가능"
 										class="frm_file ">
@@ -169,7 +169,27 @@ if (! defined('_GNUBOARD_'))
 
     function fwrite_submit(f)
     {
-        f.wr_content.value = (f.wr_1.value + '<br />'+f.wr_3.value +'<br />'+f.wr_4.value);
+    	f.wr_content.value = '';
+
+    	if(f.wr_1.value !== '-') {
+    		f.wr_content.value += f.wr_1.value;
+    		f.wr_content.value += '<br />';
+    	} 
+
+    	if(f.wr_3.value!== '-') {
+    		f.wr_content.value += f.wr_3.value;
+    		f.wr_content.value += '<br />';
+    	} 
+
+    	if(f.wr_4.value!== '-') {
+    		f.wr_content.value += f.wr_4.value;
+    		f.wr_content.value += '<br />';
+    	} 
+
+    	if(f.wr_2.value!== '-') {
+    		f.wr_content.value += f.wr_2.value;
+    	} 
+    	
         <?php echo $editor_js; // 에디터 사용시 자바스크립트에서 내용을 폼필드로 넣어주며 내용이 입력되었는지 검사함   ?>
 
         var subject = "";

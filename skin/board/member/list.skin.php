@@ -24,7 +24,7 @@ $token = null;
 	</div>
 
 	<div class="about-bg-pattern">
-		<img src="./img/curve-2.png" alt="">
+		<img src="<?php echo G5_IMG_URL?>/curve-2.png" alt="">
 	</div>
 </div>
 <!-- ****** Gallery Area Start ****** -->

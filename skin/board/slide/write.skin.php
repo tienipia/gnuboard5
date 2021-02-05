@@ -9,12 +9,12 @@ if (! defined('_GNUBOARD_'))
 		<div class="row h-100 align-items-end">
 			<div class="col-12">
 				<div class="breadcumb--con">
-					<h2 class="title">Gallery</h2>
+					<h2 class="title">Members</h2>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i>
-									Board</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Gallery</li>
+									Members</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Members</li>
 						</ol>
 					</nav>
 				</div>
@@ -55,37 +55,22 @@ if (! defined('_GNUBOARD_'))
 						<div class="row">
 
 
-							<div class="col-9">
+							<div class="col-12">
 								<div class="form-group">
 									<input type="text" class="form-control mb-30" id="wr_subject"
 										name="wr_subject" required value="<?php echo $subject ?>"
 										placeholder="title">
 								</div>
 							</div>
-							<div class="col-3">
-								<div class="form-group">
-									<select class="form-control mb-30" name="wr_1" required
-										placeholder="year"><option value="">연도 선택하세요</option>
-<?php
-$cYear = date("Y");
-for ($i = 0; $i < 50; $i ++) {
-    if ($write['wr_1'] == $cYear)?>
-    <option value="<?php echo $cYear?>"
-											<?php  if($write['wr_1']==$cYear){?> selected <?php }?>><?php echo $cYear?></option>
-    <?php
-    $cYear --;
-}
-?>
-										</select>
-								</div>
-							</div>
+
+
     <?php for ($i=0; $is_file && $i<$file_count; $i++) { ?>
 							<div class="col-12">
 								<div class="form-group">
 									<label for="bf_file_<?php echo $i+1 ?>" class="lb_icon"><i
 										class="fa fa-folder-open" aria-hidden="true"></i><span
 										class="sound_only"> 이미지 선택</span></label> <input type="file"
-										name="bf_file[]" id="bf_file_<?php echo $i+1 ?>" required accept="image/*"
+										name="bf_file[]" id="bf_file_<?php echo $i+1 ?>" accept="image/*"
 										title="이미지 <?php echo $i+1 ?> : 용량 <?php echo $upload_max_filesize ?> 이하만 업로드 가능"
 										class="frm_file ">
         <?php if($w == 'u' && $file[$i]['file']) { ?>
@@ -95,6 +80,7 @@ for ($i = 0; $i < 50; $i ++) {
 										for="bf_file_del<?php echo $i ?>"><?php echo $file[$i]['source'].'('.$file[$i]['size'].')';  ?> 파일 삭제</label>
 									</span>
         <?php } ?>
+        
     </div>
 							</div>
     <?php } ?>

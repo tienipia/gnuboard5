@@ -3,18 +3,35 @@ if (! defined('_GNUBOARD_'))
     exit(); // 개별 페이지 접근 불가
 
 ?>
+<style>
+.cke_sc {
+	display: none !important;
+}
 
+.sound_only {
+	display: inline-block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: 0;
+	line-height: 0;
+	border: 0 !important;
+	overflow: hidden !important
+}
+</style>
 <div class="breadcrumb-area">
 	<div class="container h-100">
 		<div class="row h-100 align-items-end">
 			<div class="col-12">
 				<div class="breadcumb--con">
-					<h2 class="title">Gallery</h2>
+					<h2 class="title">Members</h2>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i>
-									Board</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Gallery</li>
+									Members</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Members</li>
 						</ol>
 					</nav>
 				</div>
@@ -51,57 +68,29 @@ if (! defined('_GNUBOARD_'))
 							type="hidden" name="sst" value="<?php echo $sst ?>"> <input
 							type="hidden" name="sod" value="<?php echo $sod ?>"> <input
 							type="hidden" name="page" value="<?php echo $page ?>"> <input
-							type="hidden" id="wr_content" name="wr_content" value="">
+							type="hidden" value="html1" name="html">
 						<div class="row">
 
 
-							<div class="col-9">
+							<div class="col-12">
 								<div class="form-group">
 									<input type="text" class="form-control mb-30" id="wr_subject"
 										name="wr_subject" required value="<?php echo $subject ?>"
+										<?php if (!$is_admin ) {?> disabled <?php }?>
 										placeholder="title">
 								</div>
 							</div>
-							<div class="col-3">
-								<div class="form-group">
-									<select class="form-control mb-30" name="wr_1" required
-										placeholder="year"><option value="">연도 선택하세요</option>
-<?php
-$cYear = date("Y");
-for ($i = 0; $i < 50; $i ++) {
-    if ($write['wr_1'] == $cYear)?>
-    <option value="<?php echo $cYear?>"
-											<?php  if($write['wr_1']==$cYear){?> selected <?php }?>><?php echo $cYear?></option>
-    <?php
-    $cYear --;
-}
-?>
-										</select>
-								</div>
-							</div>
-    <?php for ($i=0; $is_file && $i<$file_count; $i++) { ?>
+
 							<div class="col-12">
-								<div class="form-group">
-									<label for="bf_file_<?php echo $i+1 ?>" class="lb_icon"><i
-										class="fa fa-folder-open" aria-hidden="true"></i><span
-										class="sound_only"> 이미지 선택</span></label> <input type="file"
-										name="bf_file[]" id="bf_file_<?php echo $i+1 ?>" required accept="image/*"
-										title="이미지 <?php echo $i+1 ?> : 용량 <?php echo $upload_max_filesize ?> 이하만 업로드 가능"
-										class="frm_file ">
-        <?php if($w == 'u' && $file[$i]['file']) { ?>
-        <span class="file_del"> <input type="checkbox"
-										id="bf_file_del<?php echo $i ?>"
-										name="bf_file_del[<?php echo $i;  ?>]" value="1"> <label
-										for="bf_file_del<?php echo $i ?>"><?php echo $file[$i]['source'].'('.$file[$i]['size'].')';  ?> 파일 삭제</label>
-									</span>
-        <?php } ?>
-    </div>
+								<div
+									class="wr_content <?php echo $is_dhtml_editor ? $config['cf_editor'] : ''; ?>">
+            <?php echo $editor_html; // 에디터 사용시는 에디터로, 아니면 textarea 로 노출 ?>
+        </div>
+
 							</div>
-    <?php } ?>
-							
-							
+
 							<div class="col-12">
-								<button type="submit" class="btn uza-btn btn-3 mt-15">생성하기</button>
+								<button type="submit" class="btn uza-btn btn-3 mt-30">생성하기</button>
 							</div>
 						</div>
 					</form>
@@ -147,7 +136,7 @@ for ($i = 0; $i < 50; $i ++) {
 
     function fwrite_submit(f)
     {
-        f.wr_content.value = 'dummy';
+        //f.wr_content.value = 'dummy';
         <?php echo $editor_js; // 에디터 사용시 자바스크립트에서 내용을 폼필드로 넣어주며 내용이 입력되었는지 검사함   ?>
 
         var subject = "";

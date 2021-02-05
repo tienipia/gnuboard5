@@ -1,58 +1,12 @@
 <?php
-if (! defined('_GNUBOARD_'))
-    exit(); // 개별 페이지 접근 불가
+if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
-if (! defined('G5_IS_ADMIN')) {
-    ?>
+if ( defined('G5_IS_ADMIN')) {
+    
+?>
 
-<footer class="footer-area">
-	<div class="container">
-		<div class="row justify-content-between">
-			<!-- Single Footer Widget -->
-			<div class="col-12 col-lg-9">
-				<div class="single-footer-widget mb-80">
-					<div class="footer-content mb-15"></div>
-				</div>
-			</div>
-			<div class="col-12 col-lg-3">
-				<div class="single-footer-widget mb-80">
-					<div class="copywrite-text mb-15">
-						<img
-							src="https://sit.yonsei.ac.kr/_res/sit/img/common/logo_footer_new.gif">
-					</div>
-
-				</div>
-			</div>
-
-		</div>
-	</div>
-</footer>
-
-<script src="<?php echo G5_JS_URL?>/uza.bundle.js"></script>
-<script>
-	$
-			.ajax({
-				url : 'https://service.tienipia.com/article/YSNIL/e70d6d84ade14d18825fe1a8e9c68f83',
-				success : function(data) {
-					console.log(data);
-					$($(".footer-content")[0]).html(data.article_body);
-				},
-				dataType : 'json',
-				async : false
-			});
-</script>
-</body>
-
-</html>
-
-<?php
-run_event('tail_sub');
-echo html_end(); 
-} else {
-    ?>
-
-</div>
-<div id="aside">
+    </div>
+    <div id="aside">
         <?php echo outlogin(); // 외부 로그인, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
         <?php echo poll(); // 설문조사, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
     </div>
@@ -66,41 +20,41 @@ echo html_end();
 <!-- 하단 시작 { -->
 <div id="ft">
 
-	<div id="ft_wr">
-		<div id="ft_link" class="ft_cnt">
-			<a href="<?php echo get_pretty_url('content', 'company'); ?>">회사소개</a>
-			<a href="<?php echo get_pretty_url('content', 'privacy'); ?>">개인정보처리방침</a>
-			<a href="<?php echo get_pretty_url('content', 'provision'); ?>">서비스이용약관</a>
-			<a href="<?php echo get_device_change_url(); ?>">모바일버전</a>
-		</div>
-		<div id="ft_company" class="ft_cnt">
-			<h2>사이트 정보</h2>
-			<p class="ft_info">
-				회사명 : 회사명 / 대표 : 대표자명<br> 주소 : OO도 OO시 OO구 OO동 123-45<br> 사업자 등록번호 :
-				123-45-67890<br> 전화 : 02-123-4567 팩스 : 02-123-4568<br> 통신판매업신고번호 : 제
-				OO구 - 123호<br> 개인정보관리책임자 : 정보책임자명<br>
+    <div id="ft_wr">
+        <div id="ft_link" class="ft_cnt">
+            <a href="<?php echo get_pretty_url('content', 'company'); ?>">회사소개</a>
+            <a href="<?php echo get_pretty_url('content', 'privacy'); ?>">개인정보처리방침</a>
+            <a href="<?php echo get_pretty_url('content', 'provision'); ?>">서비스이용약관</a>
+            <a href="<?php echo get_device_change_url(); ?>">모바일버전</a>
+        </div>
+        <div id="ft_company" class="ft_cnt">
+        	<h2>사이트 정보</h2>
+	        <p class="ft_info">
+	        	회사명 : 회사명 / 대표 : 대표자명<br>
+				주소  : OO도 OO시 OO구 OO동 123-45<br>
+				사업자 등록번호  : 123-45-67890<br>
+				전화 :  02-123-4567  팩스  : 02-123-4568<br>
+				통신판매업신고번호 :  제 OO구 - 123호<br>
+				개인정보관리책임자 :  정보책임자명<br>
 			</p>
-		</div>
+	    </div>
         <?php
-    // 공지사항
-    // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
-    // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
-    // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
-    echo latest('notice', 'notice', 4, 13);
-    ?>
+        //공지사항
+        // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
+        // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
+        // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
+        echo latest('notice', 'notice', 4, 13);
+        ?>
 
         <?php echo visit(); // 접속자집계, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
     </div>
-	<!-- <div id="ft_catch"><img src="<?php echo G5_IMG_URL; ?>/ft_logo.png" alt="<?php echo G5_VERSION ?>"></div> -->
-	<div id="ft_copy">
-		Copyright &copy; <b>소유하신 도메인.</b> All rights reserved.
-	</div>
+    <!-- <div id="ft_catch"><img src="<?php echo G5_IMG_URL; ?>/ft_logo.png" alt="<?php echo G5_VERSION ?>"></div> -->
+    <div id="ft_copy">Copyright &copy; <b>소유하신 도메인.</b> All rights reserved.</div>
 
-	<button type="button" id="top_btn">
-		<i class="fa fa-arrow-up" aria-hidden="true"></i><span
-			class="sound_only">상단으로</span>
-	</button>
-	<script>
+    <button type="button" id="top_btn">
+    	<i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sound_only">상단으로</span>
+    </button>
+    <script>
     $(function() {
         $("#top_btn").on("click", function() {
             $("html, body").animate({scrollTop:0}, '500');
@@ -111,15 +65,14 @@ echo html_end();
 </div>
 
 <?php
-    if (G5_DEVICE_BUTTON_DISPLAY && ! G5_IS_MOBILE) {
-        ?>
+if(G5_DEVICE_BUTTON_DISPLAY && !G5_IS_MOBILE) { ?>
 <?php
-    }
+}
 
-    if ($config['cf_analytics']) {
-        echo $config['cf_analytics'];
-    }
-    ?>
+if ($config['cf_analytics']) {
+    echo $config['cf_analytics'];
+}
+?>
 
 <!-- } 하단 끝 -->
 
@@ -131,5 +84,5 @@ $(function() {
 </script>
 
 <?php
-    include_once (G5_PATH . "/tail.sub.php");
 }
+include_once(G5_PATH."/tail.sub.php");

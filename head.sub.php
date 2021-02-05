@@ -200,24 +200,27 @@ var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
 								<li><a href="<?php echo G5_URL?>">Home</a></li>
 								<li><a href="javascript:event.preventDefault();">Members</a>
 									<ul class="dropdown">
-										<li><a href="prof.html">- Professor</a></li>
+										<li><a href="<?php echo G5_BBS_URL?>/content.php?co_id=prof">- Professor</a></li>
 										<li><a
 											href="<?php echo G5_BBS_URL?>/board.php?bo_table=member">-
 												Members</a></li>
 									</ul></li>
-								<li><a href="research.html">Research</a></li>
+								<li><a href="<?php echo G5_BBS_URL?>/board.php?bo_table=research">Research</a></li>
 								<li><a href="javascript:event.preventDefault();">Publications</a>
 									<ul class="dropdown">
-										<li><a href="journal.html">- Journal</a></li>
-										<li><a href="conference.html">- Conference</a></li>
-										<li><a href="patent.html">- Patent</a></li>
+										<li><a href="<?php echo G5_BBS_URL?>/board.php?bo_table=journal">- Journal</a></li>
+										<li><a href="<?php echo G5_BBS_URL?>/board.php?bo_table=contents&wr_seo_title=conference">- Conference</a></li>
+										<li><a href="<?php echo G5_BBS_URL?>/board.php?bo_table=contents&wr_seo_title=patent">- Patent</a></li>
 									</ul></li>
-								<li><a href="equipment.html">Equipment</a></li>
+								<li><a href="<?php echo G5_BBS_URL?>/board.php?bo_table=equipment">Equipment</a></li>
 								<li><a href="javascript:event.preventDefault();">Board</a>
 									<ul class="dropdown">
-										<li><a href="./notice.html">- Notice</a></li>
-										<li><a href="./gallery.html">- Gallery</a></li>
+										<li><a href="<?php echo G5_BBS_URL?>/board.php?bo_table=notice">- Notice</a></li>
+										<li><a href="<?php echo G5_BBS_URL?>/board.php?bo_table=gallery">- Gallery</a></li>
+								<?php if ($is_member) {  ?><li><a href="<?php echo G5_BBS_URL ?>/logout.php">- Logout</a></li><?php }else{?>
+									<li><a href="<?php echo G5_BBS_URL ?>/login.php">- Login</a></li><?php }?>
 									</ul></li>
+									
 							</ul>
 
 							<!-- 
