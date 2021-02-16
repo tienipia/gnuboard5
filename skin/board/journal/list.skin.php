@@ -110,7 +110,7 @@ for ($i = 0; $i < count($list); $i ++) {
         ?>
                             
 						<img class="img-thumbnail"
-							src="https://increasify.com.au/wp-content/uploads/2016/08/default-image.png"
+						src="<?php echo G5_IMG_URL ?>/placeholder-1280x720.png"
 							alt="">
                             <?php
     }
