@@ -44,7 +44,7 @@ while ($row = sql_fetch_array($result)) {
 					<div class="col-12 col-md-8">
 						<div class="welcome-thumbnail">
 							<img id="home_img" alt="">
-<?php if (defined('G5_IS_ADMIN')) {?>
+<?php if ($is_admin == 'super') {?>
 <a href="https://nil.yonsei.ac.kr/bbs/write.php?bo_table=gallery&is_home=true">사진 추가</a>
 <?php }?>
 						</div>
