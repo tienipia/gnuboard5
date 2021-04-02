@@ -38,7 +38,7 @@ if (($member['mb_id'] && ($member['mb_id'] === $list[$i]['mb_id'])) || $is_admin
 <section class="uza-portfolio-single-area section-padding-40">
 	<div class="container">
 	<?php
-if ($is_admin) {
+if (($member['mb_id'] && ($member['mb_id'] === $list[$i]['mb_id'])) || $is_admin) {
     $sql = 'select wr_1, wr_2 from ' . $g5['write_prefix'] . $bo_table . ' group by wr_1 order by wr_1 desc;';
 } else {
     $sql = 'select wr_1, wr_2 from ' . $g5['write_prefix'] . $bo_table . ' where wr_2 != 1 group by wr_1 order by wr_1 desc;';
@@ -79,7 +79,7 @@ if ($page) {
 		<?php
 
 for ($i = 0; $i < count($list); $i ++) {
-    if ($is_admin) {
+    if (($member['mb_id'] && ($member['mb_id'] === $list[$i]['mb_id'])) || $is_admin) {
         if ($list[$i]['wr_1'] != $years[$page])
             continue;
     } else {
@@ -109,11 +109,10 @@ for ($i = 0; $i < count($list); $i ++) {
 						<div class="text-center">
 							<a href="#"> 
 						<?php
-						if($list[$i]['wr_2'] == '1') {
-						    echo '<p>Main Image</p>';
-						}
-						
-						
+    if ($list[$i]['wr_2'] == '1') {
+        echo '<p>Main Image</p>';
+    }
+
     ?>
         <img class="z-depth-1" src="<?php echo $thumb['src']?>"
 								alt="<?php echo $thumb['alt']?>" data-toggle="modal"
