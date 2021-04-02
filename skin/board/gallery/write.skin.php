@@ -2,6 +2,10 @@
 if (! defined('_GNUBOARD_'))
     exit(); // 개별 페이지 접근 불가
 
+$home_img = false;
+if ($_REQUEST['is_home'] == 'true') {
+    $home_img = true;
+}
 ?>
 
 <div class="breadcrumb-area">
@@ -52,6 +56,10 @@ if (! defined('_GNUBOARD_'))
 							type="hidden" name="sod" value="<?php echo $sod ?>"> <input
 							type="hidden" name="page" value="<?php echo $page ?>"> <input
 							type="hidden" id="wr_content" name="wr_content" value="">
+							<?php if($home_img) {?>
+							<input
+							type="hidden" id="wr_2" name="wr_2" value="1">
+							<?php }?>
 						<div class="row">
 
 
@@ -85,7 +93,8 @@ for ($i = 0; $i < 50; $i ++) {
 									<label for="bf_file_<?php echo $i+1 ?>" class="lb_icon"><i
 										class="fa fa-folder-open" aria-hidden="true"></i><span
 										class="sound_only"> 이미지 선택</span></label> <input type="file"
-										name="bf_file[]" id="bf_file_<?php echo $i+1 ?>" required accept="image/*"
+										name="bf_file[]" id="bf_file_<?php echo $i+1 ?>" required
+										accept="image/*"
 										title="이미지 <?php echo $i+1 ?> : 용량 <?php echo $upload_max_filesize ?> 이하만 업로드 가능"
 										class="frm_file ">
         <?php if($w == 'u' && $file[$i]['file']) { ?>
