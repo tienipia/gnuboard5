@@ -43,9 +43,12 @@ while ($row = sql_fetch_array($result)) {
 					<!-- Welcome Thumbnail -->
 					<div class="col-12 col-md-8">
 						<div class="welcome-thumbnail">
-							<img id="home_img" alt="">
+							<div id="image_list"></div>
+							
 <?php if ($is_member) {?>
-<a href="https://nil.yonsei.ac.kr/bbs/write.php?bo_table=gallery&is_home=true">사진 추가</a>
+<a
+								href="https://nil.yonsei.ac.kr/bbs/write.php?bo_table=gallery&is_home=true">사진
+								추가</a>
 <?php }?>
 						</div>
 					</div>
@@ -57,26 +60,36 @@ while ($row = sql_fetch_array($result)) {
 <hr />
 <script>
 	var images = [<?php for($i = 0; $i < count($images); $i++) { if($i != 0) {echo ',';} echo '"'.$images[$i].'"'; } ?>];
-	$('#home_img')[0].src = images[0];
-var imgidx = 0;
+	var image_doms = [];
+	for(var i = 0 ;i < images.length; i++) {
+		var img = document.createElement('img');
+		img.src = images[i];
+		img.style.display = 'none';
+		image_doms.push(img);
+		document.getElementById("image_list").appendChild(img);
+	}
+	var imgidx = 0;
 
 function changeImage() {
-	console.log('asdf');
-	if( imgidx >= images.length) {
-		imgidx = 0;
-	}
-	$('#home_img').fadeOut(500, function() {
-		console.log(images, imgidx);
-		$('#home_img')[0].src = images[imgidx];
-		$('#home_img').fadeIn(250);
+	$(image_doms[imgidx]).fadeOut(500, function() {
+		$(image_doms[imgidx]).css('display', 'none');
+		console.log(image_doms[imgidx]);
 		imgidx++;
-		});
+		if (imgidx >= image_doms.length) {
+			imgidx = 0;
+		}
+		$(image_doms[imgidx]).fadeIn(250);
+	});
 }
 
-if(images.length > 1)
+image_doms[0].style.display = 'block';
+if(images.length > 1) {
 	setInterval(changeImage, 3000);
+}
+	
 
 </script>
+
 
 <?php
 include_once (G5_PATH . '/tail.php');
