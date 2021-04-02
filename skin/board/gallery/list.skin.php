@@ -38,7 +38,11 @@ if (($member['mb_id'] && ($member['mb_id'] === $list[$i]['mb_id'])) || $is_admin
 <section class="uza-portfolio-single-area section-padding-40">
 	<div class="container">
 	<?php
-$sql = 'select wr_1, wr_2 from ' . $g5['write_prefix'] . $bo_table . ' where wr_2 != 1 group by wr_1 order by wr_1 desc;';
+if ($is_admin) {
+    $sql = 'select wr_1, wr_2 from ' . $g5['write_prefix'] . $bo_table . ' group by wr_1 order by wr_1 desc;';
+} else {
+    $sql = 'select wr_1, wr_2 from ' . $g5['write_prefix'] . $bo_table . ' where wr_2 != 1 group by wr_1 order by wr_1 desc;';
+}
 $result = sql_query($sql);
 $years = array();
 
@@ -71,13 +75,17 @@ if ($page) {
 
 
 	<div class="container">
-	<div class="row">
+		<div class="row">
 		<?php
 
 for ($i = 0; $i < count($list); $i ++) {
-    
-    if ($list[$i]['wr_1'] != $years[$page] || $list[$i]['wr_2'] == 1)
-        continue;
+    if ($is_admin) {
+        if ($list[$i]['wr_1'] != $years[$page])
+            continue;
+    } else {
+        if ($list[$i]['wr_1'] != $years[$page] || $list[$i]['wr_2'] == 1)
+            continue;
+    }
     $thumb = get_list_thumbnail($board['bo_table'], $list[$i]['wr_id'], 640, 480, false, true);
 
     if (! $thumb['src']) {
@@ -95,43 +103,48 @@ for ($i = 0; $i < count($list); $i ++) {
 
     ?>
 <!-- Repeat -->
-		<div class="col-lg-4 col-md-12 mb-4 ">
-			<div class="img-thumbnail row h-100">
-				<div class="col-md-12 my-auto">
-					<div class="text-center">
-						<a href="#"> 
+			<div class="col-lg-4 col-md-12 mb-4 ">
+				<div class="img-thumbnail row h-100">
+					<div class="col-md-12 my-auto">
+						<div class="text-center">
+							<a href="#"> 
 						<?php
+						if($list[$i]['wr_1'] == '1') {
+						    echo '<p>Main Image</p>';
+						}
+						
+						
     ?>
         <img class="z-depth-1" src="<?php echo $thumb['src']?>"
-							alt="<?php echo $thumb['alt']?>" data-toggle="modal"
-							data-target="#modal<?php echo $i?>" />
+								alt="<?php echo $thumb['alt']?>" data-toggle="modal"
+								data-target="#modal<?php echo $i?>" />
 
-						</a>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="modal fade" id="modal<?php echo $i?>" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-			<div class="modal-dialog modal-dialog-centered modal-lg"
-				role="document">
-				<div class="modal-content">
+			<div class="modal fade" id="modal<?php echo $i?>" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg"
+					role="document">
+					<div class="modal-content">
 
-					<!-- <div class="modal-header justify-content-center">
+						<!-- <div class="modal-header justify-content-center">
 						<h3><?php echo $list[$i]['wr_subject'];?></h3>
 					</div> -->
-					<div class="modal-body mb-0 p-0 text-center ">
-						<img class="img-responsive" src="<?php echo $thumb['ori'];?>">
-					</div><?php if($token) {?>
+						<div class="modal-body mb-0 p-0 text-center ">
+							<img class="img-responsive" src="<?php echo $thumb['ori'];?>">
+						</div><?php if($token) {?>
 					<div class="modal-footer justify-content-center">
 						<?php if($delete_href) {?>
 						<a href="<?php echo $delete_href?>">삭제</a><?php  }?>
 					</div><?php  }?>
 				</div>
+				</div>
 			</div>
-		</div>
-		<!-- Repeat -->
+			<!-- Repeat -->
 			
 
 <?php } ?>
