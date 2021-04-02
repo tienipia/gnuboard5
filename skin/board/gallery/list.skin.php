@@ -109,7 +109,7 @@ for ($i = 0; $i < count($list); $i ++) {
 						<div class="text-center">
 							<a href="#"> 
 						<?php
-						if($list[$i]['wr_1'] == '1') {
+						if($list[$i]['wr_2'] == '1') {
 						    echo '<p>Main Image</p>';
 						}
 						
