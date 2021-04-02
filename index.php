@@ -44,8 +44,7 @@ while ($row = sql_fetch_array($result)) {
 					<!-- Welcome Thumbnail -->
 					<div class="col-12 col-md-8">
 						<div class="welcome-thumbnail">
-							<img id="home_img" alt="" data-animation="slideInRight"
-								data-delay="400ms">
+							<img id="home_img" alt="">
 						</div>
 					</div>
 				</div>
@@ -57,6 +56,24 @@ while ($row = sql_fetch_array($result)) {
 <script>
 	var images = [<?php for($i = 0; $i < count($images); $i++) { if($i != 0) {echo ',';} echo '"'.$images[$i].'"'; } ?>];
 	$('#home_img')[0].src = images[0];
+var imgidx = 0;
+
+function changeImage() {
+	console.log('asdf');
+	if( imgidx >= images.length) {
+		imgidx = 0;
+	}
+	$('#home_img').fadeOut(500, function() {
+		console.log(images, imgidx);
+		$('#home_img')[0].src = images[imgidx];
+		$('#home_img').fadeIn(250);
+		imgidx++;
+		});
+}
+
+if(images.length > 1)
+	setInterval(changeImage, 3000);
+
 </script>
 
 <?php
