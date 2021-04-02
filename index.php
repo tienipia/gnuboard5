@@ -6,7 +6,18 @@ if (! defined('_GNUBOARD_'))
     exit(); // 개별 페이지 접근 불가
 
 include_once (G5_PATH . '/head.php');
+
+$result = sql_query('select * from ' . $g5['write_prefix'] . 'gallery where wr_2 = 1;');
+$images = array();
+
+while ($row = sql_fetch_array($result)) {
+    $bf_image = sql_query('select * from g5_board_file where wr_id = "' . $row['wr_id'] . '" and bo_table = "gallery" ;');
+    if ($bf_result = sql_fetch_array($bf_image)) {
+        array_push($images, G5_URL . '/data/file/gallery/' . $bf_result['bf_file']);
+    }
+}
 ?>
+
 <!-- ***** Welcome Area Start ***** -->
 <section class="welcome-area">
 	<div class="single-welcome-slide">
@@ -25,7 +36,7 @@ include_once (G5_PATH . '/head.php');
 								<span>Nano</span> Inspired
 							</h2>
 							<h5 data-animation="fadeInUp" data-delay="400ms">Get Inspired at</h5>
-							<a href="https://nil.yonsei.ac.kr/journal.html"
+							<a href="https://nil.yonsei.ac.kr/bbs/board.php?bo_table=journal"
 								class="btn uza-btn btn-2" data-animation="fadeInUp"
 								data-delay="700ms">Start Exploring</a>
 						</div>
@@ -44,15 +55,9 @@ include_once (G5_PATH . '/head.php');
 </section>
 <hr />
 <script>
-	$.ajax({
-		url : default_api_server + '/layout',
-		success : function(data) {
-			console.log(data);
-			$('#home_img')[0].src = data.home_image;
-		},
-		dataType : 'json',
-		async : false
-	});
+	var images = [<?php for($i = 0; $i < count($images); $i++) { if($i != 0) {echo ',';} echo '"'.$images[$i].'"'; } ?>];
+	$('#home_img')[0].src = images[0];
 </script>
+
 <?php
 include_once (G5_PATH . '/tail.php');

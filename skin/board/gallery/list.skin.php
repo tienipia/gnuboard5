@@ -38,7 +38,7 @@ if (($member['mb_id'] && ($member['mb_id'] === $list[$i]['mb_id'])) || $is_admin
 <section class="uza-portfolio-single-area section-padding-40">
 	<div class="container">
 	<?php
-$sql = 'select wr_1 from ' . $g5['write_prefix'] . $bo_table . ' group by wr_1 order by wr_1 desc;';
+$sql = 'select wr_1, wr_2 from ' . $g5['write_prefix'] . $bo_table . ' where wr_2 != 1 group by wr_1 order by wr_1 desc;';
 $result = sql_query($sql);
 $years = array();
 
@@ -76,7 +76,7 @@ if ($page) {
 
 for ($i = 0; $i < count($list); $i ++) {
     
-    if ($list[$i]['wr_1'] != $years[$page])
+    if ($list[$i]['wr_1'] != $years[$page] || $list[$i]['wr_2'] == 1)
         continue;
     $thumb = get_list_thumbnail($board['bo_table'], $list[$i]['wr_id'], 640, 480, false, true);
 
