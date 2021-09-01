@@ -21,7 +21,7 @@ if ($row = sql_fetch_array($result)) {
     $career = $row['wr_content'];
 }
 
-$result = sql_query('select * from ' . $g5['write_prefix'] . 'member where wr_seo_title = "prof"');
+$result = sql_query('select * from ' . $g5['write_prefix'] . 'member where wr_id = 24');
 if ($row = sql_fetch_array($result)) {
     $thumb = get_list_thumbnail('member', $row['wr_id'], 480, 640, false, true);
 }
@@ -64,13 +64,15 @@ $mdf = ($member['mb_level'] >= 10);
 			<div class="col-12 col-lg-6">
 				<div class="about-us-thumbnail mb-80">
 					<img src="<?php echo $thumb['ori']?>" class="img-thumbnail" alt="">
+					<?php if($mdf){?><hr /><a href="https://nil.yonsei.ac.kr/bbs/write.php?w=u&bo_table=member&wr_id=24">사진-이름 수정</a><?php }?>
+
 				</div>
 			</div>
 
 			<!-- About Us Content -->
 			<div class="col-12 col-lg-6">
 				<div class="section-heading mb-5">
-					<h2>Jang-Yeon Kwon</h2>
+					<h2><?php echo $row['wr_1'];?></h2>
 				</div>
 
 				<div class="about-us-content mb-80">
