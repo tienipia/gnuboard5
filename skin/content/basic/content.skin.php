@@ -27,6 +27,9 @@ if ($row = sql_fetch_array($result)) {
 }
 // $co_id
 // $str;
+
+$mdf = ($member['mb_level'] >= 10);
+
 ?>
 <div class="breadcrumb-area">
 	<div class="container h-100">
@@ -91,20 +94,20 @@ if ($row = sql_fetch_array($result)) {
 							<div class="tab-pane fade show active" id="tab-1" role="tabpanel"
 								aria-labelledby="tab1">
 								<!-- Tab Content Text -->
-								<div class="tab-content-text"><?php echo $contact?></div>
+								<div class="tab-content-text"><?php echo $contact?><?php if($mdf){?><hr /><a href="https://nil.yonsei.ac.kr/bbs/write.php?w=u&bo_table=contents&wr_id=3">수정</a><?php }?></div>
 							</div>
 
 
 							<div class="tab-pane fade" id="tab-2" role="tabpanel"
 								aria-labelledby="tab2">
 								<!-- Tab Content Text -->
-								<div class="tab-content-text"><?php echo $education?></div>
+								<div class="tab-content-text"><?php echo $education?><?php if($mdf){?><hr /><a href="https://nil.yonsei.ac.kr/bbs/write.php?w=u&bo_table=contents&wr_id=4">수정</a><?php }?></div>
 							</div>
 
 							<div class="tab-pane fade" id="tab-3" role="tabpanel"
 								aria-labelledby="tab3">
 								<!-- Tab Content Text -->
-								<div class="tab-content-text"><?php echo $career?></div>
+								<div class="tab-content-text"><?php echo $career?><?php if($mdf){?><hr /><a href="https://nil.yonsei.ac.kr/bbs/write.php?w=u&bo_table=contents&wr_id=5">수정</a><?php }?></div>
 							</div>
 						</div>
 					</div>
