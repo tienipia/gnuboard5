@@ -61,7 +61,7 @@ for ($i = 0; $i < count($list); $i ++) {
         ?>
                             
 						<img class="rounded"
-							src="https://mricr.com/wp-content/uploads/2015/09/placeholder-300x400.png"
+							src="https://nil.yonsei.ac.kr/img/woocommerce-placeholder-300x400.png"
 							alt="">
                             <?php
     }
@@ -120,7 +120,7 @@ for ($i = 0; $i < count($list); $i ++) {
         ?>
                             
 						<img class="rounded"
-							src="https://mricr.com/wp-content/uploads/2015/09/placeholder-300x400.png"
+							src="https://nil.yonsei.ac.kr/img/woocommerce-placeholder-300x400.png"
 							alt="">
                             <?php
     }
